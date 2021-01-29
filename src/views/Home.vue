@@ -1,7 +1,7 @@
 <template>
-  <v-app class="background">
+  <v-app class="background" >
     <v-container>
-      <v-card class="mx-auto" max-width="344">
+      <v-card class="mx-auto rounded" max-width="344" :dark="alignment">
         <v-img :src="heroes.data.image.url" height="350px"></v-img>
         <v-card-subtitle class="text-center py-3">
           {{ heroes.data.biography["full-name"] }}
@@ -86,7 +86,7 @@
         </v-expand-transition>
 
         <v-card-actions class="red white--text">
-          <v-card-title class=" "> Powerstats </v-card-title>
+          <v-card-title> Powerstats </v-card-title>
 
           <v-spacer></v-spacer>
 
@@ -159,6 +159,7 @@ export default {
       heroes: "",
       showStats: false,
       aliases: '',
+      alignment: false,
     };
   },
   methods: {
@@ -173,6 +174,9 @@ export default {
         );
         this.heroes = datos;
         this.aliases = datos.data.biography.aliases;
+        if(datos.data.biography.alignment == "bad"){
+          this.alignment = true
+        }
         console.log(datos.data);
       } catch (error) {
         console.log(error);
